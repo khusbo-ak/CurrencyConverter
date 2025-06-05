@@ -16,8 +16,8 @@ body {
 }
 
 .container {
-  width: 60vh;
-  min-height: 65vh;
+  width: 45vh;
+  min-height: 50vh;
   padding: 2rem;
   background: linear-gradient(to bottom, #2d1313, #2b2929);
   border-radius: 0.8rem;

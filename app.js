@@ -1,8 +1,12 @@
-const BASE_URL ="https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_hsGM9ASe16VrvbHriYS6nqRhRbNayakUYCsfItyV";
+// const BASE_URL ="https://v6.exchangerate-api.com/v6/27f508d81862105c8acb44e0/latest/USD";
+// const BASE_URL = "https://latest.currency-api.pages.dev/v1/currencies";
+const BASE_URL = "https://api.frankfurter.app/latest?";
 const dropdowns = document.querySelectorAll(".dropdown select");
 const button = document.querySelector("form button");
 const fromCurr = document.querySelector(".from select");
+// console.log("🚀 ~ fromCurr:", fromCurr)
 const toCurr = document.querySelector(".to select");
+// console.log("🚀 ~ toCurr:", toCurr)
 // for (code in countryList) {
 //   console.log(code);
 // }
@@ -43,13 +47,26 @@ button.addEventListener("click", async(e) => {
 
   if (amountValue === "" || amountValue <= 0) {
     alert("Please enter a valid amount");
+   
     return;
   }
-    console.log(fromCurr.value, toCurr.value);
-
- const URL = `${BASE_URL}/${fromCurr.value.toLowerCase}/${toCurr.value.toLowerCase}.json`;
+  // console.log(fromCurr.value, toCurr.value);
+  
+  console.log("🚀 ~ button.addEventListener ~ toCurr.value:", toCurr.value)
+  console.log("🚀 ~ button.addEventListener ~ fromCurr.value:", fromCurr.value)
+  const URL = `${BASE_URL}amount=${amountValue}&from=${fromCurr.value}&to=${toCurr.value}`;
+  console.log("🚀 ~ button.addEventListener ~ URL:", URL)
+// const URL = `https://latest.currency-api.pages.dev/v1/currencies/eur.json`;
  let response = await fetch(URL);
   console.log(response);
-
+ const data = await response.json();
+  console.log("🚀 ~ button.addEventListener ~ data:", data);
+  let result = document.querySelector(".msg");
+   console.log("🚀 ~ button.addEventListener ~ result:", result)
+  result.innerText = `${amountValue} ${fromCurr.value} = ${data.rates[toCurr.value]} ${toCurr.value}`;
+  // console.log(result);
+  // console.log(data[toCurr.value]);
+  // console.log(data[fromCurr.value]);
+  // console.log(data[fromCurr.value][toCurr.value]);
   
 });
